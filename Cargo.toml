@@ -1,0 +1,39 @@
+[workspace]
+resolver = "2"
+
+members = [
+  "glean-core",
+  "glean-core/rlb",
+  "glean-core/rlb-tests",
+  "glean-core/bundle",
+  "glean-core/bundle-android",
+  "glean-core/build",
+  "samples/rust",
+  "samples/rapid-metrics",
+  "tools/embedded-uniffi-bindgen",
+  "tools/glean-sym-parser",
+  "glean-core/glean-sym",
+]
+
+default-members = [
+  "glean-core",
+  "glean-core/rlb",
+  "tools/embedded-uniffi-bindgen",
+]
+
+[profile.release]
+opt-level = 2
+debug = "line-tables-only"
+split-debuginfo = "unpacked"
+lto = true
+
+[profile.profiling]
+opt-level = 3
+inherits = "release"
+debug = true
+
+[profile.dev.package.miniz_oxide]
+opt-level = 3
+
+[profile.dev.package.flate2]
+opt-level = 3
